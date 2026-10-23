@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gorilla Flicks | Movie Hangout</title>
+<meta name="theme-color" content="#090812">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --bg: #090812;
+  --purple: #9b65ff;
+  --pink: #ff5edb;
+  --muted: #aaa5c1;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: white;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 10%, #6634a52b, transparent 45%),
+    radial-gradient(ellipse at 90% 35%, #e747a31b, transparent 40%);
+}
+
+a { color: inherit; text-decoration: none; }
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 7%;
+  background: #090812ef;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid #ffffff12;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span { color: var(--purple); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.nav-links a:hover { color: white; }
+
+.join-small, .primary, .secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 19px;
+  border-radius: 11px;
+  font-weight: 800;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.join-small, .primary {
+  background: linear-gradient(110deg, #8b5cf6, #c45cff);
+  color: white !important;
+  box-shadow: 0 0 25px #985cff35;
+}
+
+.secondary {
+  border: 1px solid #ffffff27;
+  background: #ffffff08;
+}
+
+.primary:hover, .secondary:hover, .join-small:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 35px #985cff45;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid #ffffff25;
+  color: white;
+  border-radius: 9px;
+  font-size: 23px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px 85px;
+  position: relative;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  background: #9b65ff18;
+  filter: blur(65px);
+  pointer-events: none;
+}
+
+.orb.one { top: 30px; left: -180px; }
+.orb.two { right: -170px; bottom: 20px; background: #ff5edb15; }
+
+.tag {
+  display: inline-block;
+  border: 1px solid #a879ff55;
+  background: #9b65ff15;
+  padding: 9px 14px;
+  border-radius: 50px;
+  color: #d8c4ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-size: clamp(43px, 8vw, 84px);
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: 1.06;
+}
+
+.gradient {
+  background: linear-gradient(100deg, #a980ff, #ff75d9, #a980ff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+.hero p {
+  max-width: 560px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 24px 0 28px;
+  font-size: 15px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 45px;
+  margin-top: 55px;
+}
+
+.stat strong { display: block; font-size: 22px; }
+.stat span { display: block; font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+section { padding: 85px 7%; }
+
+.section-head {
+  text-align: center;
+  margin: 0 auto 42px;
+  max-width: 650px;
+}
+
+.eyebrow {
+  color: #b899ff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: clamp(30px, 5vw, 44px);
+  letter-spacing: -1.8px;
+  font-weight: 900;
+}
+
+.section-head p {
+  color: var(--muted);
+  margin-top: 13px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.card {
+  padding: 27px;
+  background: linear-gradient(145deg, #19152a, #100f19);
+  border: 1px solid #ffffff12;
+  border-radius: 20px;
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #a879ff85;
+  box-shadow: 0 15px 45px #00000040;
+}
+
+.card-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #9860ff2e, #ff5edb20);
+  border: 1px solid #ffffff12;
+  margin-bottom: 22px;
+}
+
+.card h3 { font-size: 18px; margin-bottom: 12px; }
+.card p { font-size: 13px; line-height: 1.8; color: var(--muted); }
+
+.featured {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px;
+  border: 1px solid #a879ff40;
+  border-radius: 25px;
+  background: radial-gradient(ellipse at top right, #a35cff20, transparent 50%), #141120;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.featured h2 { font-size: clamp(27px, 4vw, 40px); }
+.featured p { color: var(--muted); line-height: 1.8; margin-top: 14px; max-width: 570px; font-size: 14px; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.step {
+  border-top: 2px solid #a879ff70;
+  padding: 25px 20px;
+  background: #ffffff05;
+  border-radius: 0 0 14px 14px;
+}
+
+.step-number { color: #b899ff; font-size: 12px; font-weight: 900; }
+.step h3 { margin: 13px 0 9px; font-size: 16px; }
+.step p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+.cta {
+  text-align: center;
+  padding: 75px 20px;
+  margin: 0 7% 70px;
+  border: 1px solid #a879ff50;
+  border-radius: 25px;
+  background: radial-gradient(ellipse at top, #8d4fff27, transparent 75%), #141120;
+}
+
+.cta h2 { margin-bottom: 15px; }
+.cta p { color: var(--muted); margin: 0 auto 25px; line-height: 1.8; max-width: 500px; font-size: 14px; }
+
+footer {
+  border-top: 1px solid #ffffff12;
+  padding: 28px 7%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer strong { color: white; }
+
+@media (max-width: 760px) {
+  nav { padding: 15px 5%; }
+  .menu-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 67px;
+    left: 0;
+    right: 0;
+    padding: 22px;
+    background: #100e1b;
+    border-bottom: 1px solid #ffffff15;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 14px; }
+  .join-small { text-align: center; }
+  .hero { min-height: 570px; padding-top: 75px; }
+  h1 { letter-spacing: -2px; }
+  .stats { gap: 25px; }
+  section { padding: 65px 5%; }
+  .grid, .steps { grid-template-columns: 1fr; }
+  .featured { padding: 27px; flex-direction: column; align-items: flex-start; }
+  .cta { margin: 0 5% 45px; padding: 55px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="#home" class="logo">🐒 GORILLA<span>FLICKS</span></a>
+
+  <button class="menu-toggle" id="menuToggle"
+    aria-label="Toggle navigation" aria-expanded="false"
+    aria-controls="navLinks">☰</button>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#home">HOME</a>
+    <a href="#movies">MOVIE NIGHTS</a>
+    <a href="#community">COMMUNITY</a>
+    <a href="#how">HOW TO JOIN</a>
+    <a href="https://discord.gg/Txa9CRn2c" target="_blank" rel="noopener noreferrer" class="join-small">💬 JOIN DISCORD ↗</a>
+  </div>
+</nav>
+
+<main>
+  <header class="hero" id="home">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+    <div class="tag">🍿 THE GORILLA TAG MOVIE COMMUNITY</div>
+
+    <h1>
+      YOUR LOBBY.<br>
+      YOUR PEOPLE.<br>
+      <span class="gradient">YOUR MOVIE NIGHT.</span>
+    </h1>
+
+    <p>
+      Welcome to Gorilla Flicks — a community for Gorilla Tag fans
+      who love movies, funny moments, hanging out, and watching
+      awesome videos together.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://discord.gg/Txa9CRn2c" target="_blank" rel="noopener noreferrer" class="primary">💜 Join the Discord ↗</a>
+      <a href="#movies" class="secondary">🍿 Explore the server</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong>🐒</strong><span>GORILLA TAG FANS</span></div>
+      <div class="stat"><strong>🎬</strong><span>MOVIE HANGOUTS</span></div>
+      <div class="stat"><strong>💜</strong><span>COMMUNITY VIBES</span></div>
+    </div>
+  </header>
+
+  <section id="movies">
+    <div class="section-head">
+      <div class="eyebrow">THE MAIN EVENT</div>
+      <h2>Welcome to the <span class="gradient">Movie Lobby.</span></h2>
+      <p>More than just another server. It's your spot to hang out
+      with other Gorilla Tag fans and enjoy movie nights.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="card-icon">🎥</div>
+        <h3>Movie Nights</h3>
+        <p>Join community movie sessions, chill with other members,
+        and enjoy the show when a host starts an event.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🐒</div>
+        <h3>Gorilla Tag Fans</h3>
+        <p>Meet people who enjoy Gorilla Tag, fan-made stories,
+        funny clips, and the game's unique world.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">📢</div>
+        <h3>Live Host Alerts</h3>
+        <p>Watch for movie-host announcements in Discord so you
+        can see when a session is starting.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="featured">
+      <div>
+        <div class="eyebrow">YOUR NEXT FAVORITE SERVER</div>
+        <h2>Pull up to the <span class="gradient">lobby.</span></h2>
+        <p>Find movie buddies, chat with the community, meet the
+        hosts, and share the excitement of Gorilla Tag fan culture.
+        Grab a seat and enjoy the vibes!</p>
+      </div>
+      <a class="primary" href="https://discord.gg/Txa9CRn2c" target="_blank" rel="noopener noreferrer">Join the community ↗</a>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="section-head">
+      <div class="eyebrow">THREE EASY STEPS</div>
+      <h2>Get in on the <span class="gradient">action.</span></h2>
+      <p>Your next movie hangout is only a few clicks away.</p>
+    </div>
+
+    <div class="steps">
+      <article class="step">
+        <div class="step-number">STEP 01</div>
+        <h3>💜 Join Discord</h3>
+        <p>Enter the server and check out the channels and rules.</p>
+      </article>
+
+      <article class="step">
+        <div class="step-number">STEP 02</div>
+        <h3>🔔 Watch Announcements</h3>
+        <p>Keep an eye out for movie hosts and upcoming sessions.</p>
+      </article>
+
+      <article class="step">
+        <div class="step-number">STEP 03</div>
+        <h3>🍿 Enjoy the Show</h3>
+        <p>Join an available movie session and hang out with everyone.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="eyebrow">THE LOBBY IS CALLING</div>
+    <h2>Ready to <span class="gradient">roll in?</span></h2>
+    <p>Grab your spot in the Gorilla Tag movie community.
+    Your next movie night awaits!</p>
+    <a class="primary" href="https://discord.gg/Txa9CRn2c" target="_blank" rel="noopener noreferrer">🐒 ENTER THE DISCORD ↗</a>
+  </section>
+</main>
+
+<footer>
+  <div><strong>🐒 GORILLA FLICKS</strong><br><br>A fan community for movie lovers.</div>
+  <div>Fan-made community. Not affiliated with Another Axiom or Gorilla Tag.</div>
+  <div>© <span id="year"></span> Gorilla Flicks</div>
+</footer>
+
+<script>
+const toggle = document.getElementById("menuToggle");
+const links = document.getElementById("navLinks");
+
+toggle.addEventListener("click", () => {
+  const isOpen = links.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(isOpen));
+  toggle.textContent = isOpen ? "✕" : "☰";
+});
+
+links.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    links.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.textContent = "☰";
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
